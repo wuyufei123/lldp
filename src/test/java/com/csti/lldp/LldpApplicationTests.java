@@ -1,0 +1,13 @@
+package com.csti.lldp;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class LldpApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
