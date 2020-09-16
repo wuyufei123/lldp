@@ -9,7 +9,13 @@
         FROM lldp_user where ip=?
     </select>
     <!--查询所有 -->
-    <select id="lldpUserSelectAll" resultType="java.util.List">
+    <resultMap id="LldpUser" type="com.csti.lldp.model.LldpUser">
+        <id column="ip" jdbcType="VARCHAR" property="ip" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="alias" jdbcType="VARCHAR" property="alias" />
+    </resultMap>
+    <select id="lldpUserSelectAll" resultMap="LldpUser">
         SELECT
         *
         FROM lldp_user
