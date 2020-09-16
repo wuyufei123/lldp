@@ -51,7 +51,7 @@ public class lldptest {
         for(int i=0;i<lineList.size();i++) {
             map=format(lineList.get(i));
             lineFormat=map.get("lineFormat");
-            outList.add(localDev + "  " + lineFormat);
+            outList.add(localDev + " " + lineFormat);
         }
 
         for(int i=0;i<lineList.size();i++) {
