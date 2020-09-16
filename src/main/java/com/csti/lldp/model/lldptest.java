@@ -1,4 +1,4 @@
-package com.csti.model;
+package com.csti.lldp.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;

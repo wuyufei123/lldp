@@ -1,4 +1,4 @@
-package com.csti.model;
+package com.csti.lldp.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
