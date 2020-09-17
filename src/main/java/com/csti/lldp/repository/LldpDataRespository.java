@@ -25,6 +25,6 @@ public interface LldpDataRespository {
      })
      List<LldpData> findAll();
 
-     @Insert("insert into lldp_data(local_dev,local_des,param,next_des,next_dev)"+"values(#(localDev),#(localDes),#(param),#(nextDes),#(nextDev))")
+     @Insert("insert into lldp_data(local_dev,local_des,param,next_des,next_dev)"+"values(#{localDev},#{localDes},#{param},#{nextDes},#{nextDev})")
      int insertLldpData(LldpData lldpData);
 }
