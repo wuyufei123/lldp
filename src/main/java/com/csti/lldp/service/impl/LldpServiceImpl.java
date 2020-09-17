@@ -2,8 +2,11 @@ package com.csti.lldp.service.impl;
 
 import com.csti.lldp.mapper.LldpUserMapper;
 import com.csti.lldp.model.LldpUser;
+import com.csti.lldp.model.LldpData;
+import com.csti.lldp.repository.LldpDataRespository;
 import com.csti.lldp.service.LldpService;
 import com.csti.lldp.utils.LldpUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +15,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.List;
+
 /**
  * @Author jinxin
  * @Date 2020/9/16 3:53 下午
  */
 @Service
-public class LldpServiceImpl implements LldpService {
+public class LldpServiceImpl  implements LldpService {
+    @Autowired
+    LldpDataRespository lldpDataRespository;
     @Autowired
     LldpUtil lldpUtil;
     @Autowired
     LldpUserMapper lldpUserMapper;
+    @Override
+    public List findAll() {
+        List<LldpData> dataList = lldpDataRespository.findAll();
+        return dataList;
+    }
+
+
 
     /**
      * @param localDev
