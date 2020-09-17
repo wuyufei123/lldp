@@ -32,7 +32,13 @@ public class LldpServiceImpl implements LldpService {
     @Override
     public List findAll() {
         List<LldpData> dataList = lldpDataRespository.findAll();
-        return dataList;
+        if (dataList.isEmpty()) {
+            dataBaseOfTale();
+            dataList = lldpDataRespository.findAll();
+            return dataList;
+        } else {
+            return dataList;
+        }
     }
 
 
