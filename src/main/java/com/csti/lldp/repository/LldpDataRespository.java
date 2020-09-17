@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface LldpDataRespository {
-     @Select("select  *  from  lldp_data create_time > DATE_SUB(NOW(),INTERVAL  2 MINUTE)")
+     @Select("select  *  from  lldp_data  where create_time > DATE_SUB(NOW(),INTERVAL  10 MINUTE)")
      @Results(id="dataResults", value={
              @Result(property="localDev",   column="local_dev"),
              @Result(property="localDes",  column="local_des"),
