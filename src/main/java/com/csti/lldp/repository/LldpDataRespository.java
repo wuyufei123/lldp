@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface LldpDataRespository {
-     @Select("select  *  from  lldp_data")
+     @Select("select  *  from  lldp_data create_time > DATE_SUB(NOW(),INTERVAL  2 MINUTE)")
      @Results(id="dataResults", value={
              @Result(property="localDev",   column="local_dev"),
              @Result(property="localDes",  column="local_des"),
@@ -24,4 +24,7 @@ public interface LldpDataRespository {
              @Result(property="nextDev", column="next_dev"),
      })
      List<LldpData> findAll();
+
+     @Insert("insert into lldp_data(local_dev,local_des,param,next_des,next_dev)"+"values(#(localDev),#(localDes),#(param),#(nextDes),#(nextDev))")
+     int insertLldpData(LldpData lldpData);
 }
