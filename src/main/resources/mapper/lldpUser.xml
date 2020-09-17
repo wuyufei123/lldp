@@ -6,7 +6,7 @@
     <select id="lldpUserSelect" parameterType="java.lang.String" resultType="com.csti.lldp.model.LldpUser">
         SELECT
         *
-        FROM lldp_user where ip=?
+        FROM lldp_user where ip=#{ip}
     </select>
     <!--查询所有 -->
     <resultMap id="LldpUser" type="com.csti.lldp.model.LldpUser">

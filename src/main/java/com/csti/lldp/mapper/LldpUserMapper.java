@@ -14,6 +14,6 @@ import java.util.List;
 public interface LldpUserMapper {
     //查询LldpUser所有设备
     List<LldpUser> lldpUserSelectAll();
-    //根据ip查询
+    //根据名称查询
     LldpUser lldpUserSelect(String ip);
 }

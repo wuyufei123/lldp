@@ -68,61 +68,6 @@ public class LldpServiceImpl  implements LldpService {
             map = lldpUtil.format(lineList.get(i));
             //对端端口
             nextDev = map.get("nextDev");
-           /* switch (nextDev) {
-                case "Sw1":
-                    ip = "10.1.81.1";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "Sw2":
-                    ip = "10.1.81.2";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "SW3":
-                    ip = "10.1.81.3";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "SW4":
-                    ip = "10.1.81.4";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "SW5":
-                    ip = "10.1.81.5";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "SW6":
-                    ip = "10.1.81.6";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "SW7":
-                    ip = "10.1.81.7";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "Sw8":
-                    ip = "10.1.81.8";
-                    username = "jsict@default";
-                    password = "jsict";
-                    break;
-                case "sw9":
-                    ip = "10.1.81.9";
-                    username = "jsict";
-                    password = "jsict";
-                    break;
-                case "sw10":
-                    ip = "10.1.81.10";
-                    username = "jsict";
-                    password = "jsict";
-                    break;
-                default:
-                    break;
-
-            }*/
             //查询所有设备信息
             List<LldpUser> ListUser = lldpUserMapper.lldpUserSelectAll();
             for (LldpUser user : ListUser) {
@@ -145,5 +90,24 @@ public class LldpServiceImpl  implements LldpService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void dataBaseOfTale() {
+        ArrayList<String> outList = new ArrayList<>();
+        ArrayList<String> passList = new ArrayList<>();
+        //输入第一台设备名(根据第一台设备名查询信息)
+        LldpUser lldpUser = lldpUserMapper.lldpUserSelect("10.1.81.1");
+        String nextdev = lldpUser.getAlias();
+        passList.add(nextdev);
+        multiRound(nextdev, lldpUser.getAlias(), lldpUser.getIp(), lldpUser.getUsername(), lldpUser.getPassword(), passList, outList);
+        lldpUtil.distinct(outList);
+        for (int i = 0; i < outList.size(); i++) {
+            //截取并入库
+            for(String s:outList.get(i).split(" ")){
+
+            }
+            System.out.println(outList.get(i));
+        }
     }
 }
