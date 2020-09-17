@@ -7,7 +7,6 @@ import com.csti.lldp.repository.LldpDataRespository;
 import com.csti.lldp.service.LldpService;
 import com.csti.lldp.utils.LldpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,26 +14,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import java.util.List;
-
 /**
  * @Author jinxin
  * @Date 2020/9/16 3:53 下午
  */
 @Service
-public class LldpServiceImpl  implements LldpService {
+public class LldpServiceImpl implements LldpService {
+    //第一台设备
+    private static final String IP = "10.1.81.1";
     @Autowired
     LldpDataRespository lldpDataRespository;
     @Autowired
     LldpUtil lldpUtil;
     @Autowired
     LldpUserMapper lldpUserMapper;
+
     @Override
     public List findAll() {
         List<LldpData> dataList = lldpDataRespository.findAll();
         return dataList;
     }
-
 
 
     /**
@@ -97,17 +96,19 @@ public class LldpServiceImpl  implements LldpService {
         ArrayList<String> outList = new ArrayList<>();
         ArrayList<String> passList = new ArrayList<>();
         //输入第一台设备名(根据第一台设备名查询信息)
-        LldpUser lldpUser = lldpUserMapper.lldpUserSelect("10.1.81.1");
+        LldpUser lldpUser = lldpUserMapper.lldpUserSelect(IP);
         String nextdev = lldpUser.getAlias();
         passList.add(nextdev);
         multiRound(nextdev, lldpUser.getAlias(), lldpUser.getIp(), lldpUser.getUsername(), lldpUser.getPassword(), passList, outList);
         lldpUtil.distinct(outList);
         for (int i = 0; i < outList.size(); i++) {
             //截取并入库
-            for(String s:outList.get(i).split(" ")){
-
-            }
-            System.out.println(outList.get(i));
+            String[] str = outList.get(i).split(" ");
+            //判断有无参数（待定）
+            LldpData lldpData = new LldpData(str[0], str[1], str[2], str[3], str[4]);
+            //入库
+            lldpDataRespository.insertLldpData(lldpData);
+            //  System.out.println(outList.get(i));
         }
     }
 }
